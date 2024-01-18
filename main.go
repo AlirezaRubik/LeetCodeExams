@@ -1,10 +1,89 @@
 package main
 
 import (
+	"fmt"
 	"sort"
 	"strings"
+	"sync"
 )
 
+//////////////////////////////////////////////////////////////////////////
+//136. Single Number
+func singleNumber(nums []int) {
+	count := 0
+	for i := 0; i < len(nums); i++ {
+		for j := 0; j < len(nums); j++ {
+			if nums[i] == nums[j] {
+				count++
+				if count > 1 {
+					nums[i] = 0
+					nums[j] = 0
+					count = 0
+				}
+			}
+			if count > 1 {
+				nums[i] = 0
+				nums[j] = 0
+
+			}
+		}
+		count = 0
+
+	}
+	var index int
+	for i := 0; i < len(nums); i++ {
+		if nums[i] != 0 {
+			index = nums[i]
+		}
+	}
+	fmt.Print(index)
+}
+
+//way2:
+
+// func singleNumber(nums []int) int {
+// 	numCount := make(map[int]int)
+
+
+// 	for _, num := range nums {
+// 		numCount[num]++
+// 	}
+
+
+// 	var result int
+// 	for num, count := range numCount {
+// 		if count == 1 {
+// 			result = num
+// 			break
+// 		}
+// 	}
+
+// 	return result
+// }
+
+// //////////////////////////////////////////////////////////////////////////
+// 75. Sort Colors
+func SortColors(nums []int) {
+	sort.Slice(nums, func(i, j int) bool {
+		return nums[i] < nums[j]
+	})
+	for _, item := range nums {
+		fmt.Println(item)
+	}
+}
+
+// //////////////////////////////////////////////////////////////////////////
+func countTestedDevices(batteryPercentages []int) int {
+	max := batteryPercentages[0]
+	for _, item := range batteryPercentages {
+		if item > max {
+			max = item
+		}
+	}
+	return max
+}
+
+////////////////////////////////////////////////////////////////////////////
 // func plusOne(digits []int) []int{
 // 	num := 0
 // 	for i := 0; i < len(digits); i++ {
@@ -21,7 +100,7 @@ import (
 // }
 
 func plusOne(digits []int) []int {
-    
+
 	n := len(digits)
 	for i := n - 1; i >= 0; i-- {
 		if digits[i] < 9 {
@@ -39,116 +118,116 @@ func plusOne(digits []int) []int {
 
 //1: 88. Merge Sorted Array
 
-// func merge(nums1 []int, m int, nums2 []int, n int)  {
-// slice:=[]int{}
-// slice2:=[]int{}
-// slice=nums1
-// slice2=nums2
-// nums2=nil
-// nums1=nil
-// for i:=0;i<m;i++{
-// 	nums1=append(nums1,slice[i])
-// }
-// for i:=0;i<n;i++{
-// 	nums1=append(nums1,slice2[i])
-// }
-// sort.Ints(nums1)
-// fmt.Printf("%v ",nums1)
-// }
+func merge(nums1 []int, m int, nums2 []int, n int) {
+	slice := []int{}
+	slice2 := []int{}
+	slice = nums1
+	slice2 = nums2
+	nums2 = nil
+	nums1 = nil
+	for i := 0; i < m; i++ {
+		nums1 = append(nums1, slice[i])
+	}
+	for i := 0; i < n; i++ {
+		nums1 = append(nums1, slice2[i])
+	}
+	sort.Ints(nums1)
+	fmt.Printf("%v ", nums1)
+}
 
 //////////////////////////////////////////////////////////////////
 
 //2:389. Find the Difference
 
-// func findTheDifference(s string, t string) byte {
-//     if s == "" {
-//         return t[0]
-//     }
+func findTheDifference(s string, t string) byte {
+	if s == "" {
+		return t[0]
+	}
 
-//     tmp := make(map[byte]int)
-//     for i := 0; i < len(s); i++ {
-//         tmp[s[i]-'a']++
-//         tmp[t[i]-'a']++
-//     }
-//     tmp[t[len(s)]-'a']++
+	tmp := make(map[byte]int)
+	for i := 0; i < len(s); i++ {
+		tmp[s[i]-'a']++
+		tmp[t[i]-'a']++
+	}
+	tmp[t[len(s)]-'a']++
 
-//     var found byte
-//     for b, c := range tmp {
-//         if c % 2 != 0 {
-//             found = b+'a'
-//             break
-//         }
-//     }
+	var found byte
+	for b, c := range tmp {
+		if c%2 != 0 {
+			found = b + 'a'
+			break
+		}
+	}
 
-//     return found
-// }
+	return found
+}
 
 //////////////////////////////////////////////////////////////////
 
 //3: 242. Valid Anagram
 
-// func isAnagram(s string, t string) bool {
-//     if len(s) != len(t) {
-//         return false
-//     }
+func isAnagram(s string, t string) bool {
+	if len(s) != len(t) {
+		return false
+	}
 
-//     m := make(map[rune]int)
+	m := make(map[rune]int)
 
-//     for _, c := range s {
-//         m[c]++
-//     }
+	for _, c := range s {
+		m[c]++
+	}
 
-//     for _, c := range t {
-//         if _, ok := m[c]; !ok {
-//             return false
-//         } else {
-//             m[c] --
-//             if m[c] < 0 {
-//                 return false
-//             }
-//         }
-//     }
+	for _, c := range t {
+		if _, ok := m[c]; !ok {
+			return false
+		} else {
+			m[c]--
+			if m[c] < 0 {
+				return false
+			}
+		}
+	}
 
-//     return true
-// }
+	return true
+}
 
 //////////////////////////////////////////////////////////////////
 
 //4:628. Maximum Product of Three Numbers
 
-// func maximumProduct(nums []int) int {
-// 	sort.Ints(nums)
+func maximumProduct(nums []int) int {
+	sort.Ints(nums)
 
-// 	l := len(nums)
-// 	max := nums[l-1] * nums[l-2] * nums[l-3]
+	l := len(nums)
+	max := nums[l-1] * nums[l-2] * nums[l-3]
 
-// 	if nums[0] < 0 && nums[1] < 0 {
-// 		c := nums[0] * nums[1] * nums[l-1]
-// 		if c > max {
-// 			max = c
-// 		}
-// 	}
-// 	return max
-// }
+	if nums[0] < 0 && nums[1] < 0 {
+		c := nums[0] * nums[1] * nums[l-1]
+		if c > max {
+			max = c
+		}
+	}
+	return max
+}
 
 //////////////////////////////////////////////////////////////////
 
 //5: 258. Add Digits
 
-//func addDigits(num int) int {
+func addDigits(num int) int {
 //way1
-// ren:=num
-// reg:=0
-// for i:=0;num>0;i++{
-//     reg+=num%10
-// 	num/=10
-// }
-// res:=0
-// for i:=0;ren>0;i++{
-// 	res++
-// 	ren/=10
-// }
-// return res
+ ren:=num
+ reg:=0
+ for i:=0;num>0;i++{
+     reg+=num%10
+ 	num/=10
+ }
+ res:=0
+ for i:=0;ren>0;i++{
+ 	res++
+ 	ren/=10
+ }
+ return res
 //way2
 
 //     if num == 0 {
@@ -158,33 +237,33 @@ func plusOne(digits []int) []int {
 //         return 9
 //     }
 //     return num % 9
-// }
+ }
 
 //////////////////////////////////////////////////////////////////
 
 //6: 169. Majority Element
 
-//func majorityElement(nums []int) int {
+func majorityElement(nums []int) int {
 //way 1
-//    	count:=0
-// 	repeater:=make(map[int]int)
-// 	for i:=0;i<len(nums);i++{
-// 		for j:=0;j<len(nums);j++{
-// 			if nums[i]==nums[j]{
-// 				count++;
-// 			}
-// 		}
-// 		repeater[nums[i]]=count
-//         count=0
-// 	}
-// 	var maxKey, maxValue int
-// 	for key, value := range repeater {
-// 		if value > maxValue {
-// 			maxValue = value
-// 			maxKey = key
-// 		}
-// 	}
-//    return maxKey
+    	count:=0
+ 	repeater:=make(map[int]int)
+ 	for i:=0;i<len(nums);i++{
+ 		for j:=0;j<len(nums);j++{
+ 			if nums[i]==nums[j]{
+ 				count++;
+ 			}
+ 		}
+ 		repeater[nums[i]]=count
+         count=0
+ 	}
+ 	var maxKey, maxValue int
+ 	for key, value := range repeater {
+ 		if value > maxValue {
+ 			maxValue = value
+ 			maxKey = key
+ 		}
+ 	}
+    return maxKey
 
 //way2
 // 	candidate := nums[0]
@@ -203,32 +282,33 @@ func plusOne(digits []int) []int {
 // 	}
 
 // 	return candidate
-// }
+ }
 
 //////////////////////////////////////////////////////////////////
 
 //7: 217. Contains Duplicate
 
-//func containsDuplicate(nums []int) bool {
-//count:=0
-//wg:=sync.WaitGroup{}
-//  for i:=0;i<len(nums);i++{
-//	wg.Add(1)
-//	go func(){
-//		for j:=0;j<len(nums);j++{
-//            if nums[i]==nums[j]{
-//               count++
-//           }
-//       }
-//		wg.Done()
-//	}()
-//   wg.Wait()
-//	if count>=2{
-//		return true
-//	}
-//	count=0
-//}
-//return false
+func containsDuplicate(nums []int) bool {
+count:=0
+wg:=sync.WaitGroup{}
+  for i:=0;i<len(nums);i++{
+	wg.Add(1)
+	go func(){
+		for j:=0;j<len(nums);j++{
+            if nums[i]==nums[j]{
+               count++
+           }
+       }
+		wg.Done()
+	}()
+   wg.Wait()
+	if count>=2{
+		return true
+	}
+	count=0
+}
+return false
+//way 2
 //     m:=make(map[int]bool)
 //     for _,el:=range nums{
 //         _,ok:=m[el]
@@ -238,7 +318,7 @@ func plusOne(digits []int) []int {
 //         m[el]=true
 //     }
 //     return false
-// }
+ }
 //////////////////////////////////////////////////////////////////
 
 //8: 16. 3Sum Closest
