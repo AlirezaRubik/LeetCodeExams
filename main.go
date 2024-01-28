@@ -6,7 +6,37 @@ import (
 	"strings"
 	"sync"
 )
+//////////////////////////////////////////////////////////////////////////
+func missingNumber(nums []int) int {
+	little := nums[0]
+	big := nums[0]
+	for _, item := range nums {
 
+		if item < little {
+			little = item
+		}
+		if item > big {
+			big = item
+		}
+	}
+	slice := []int{}
+	for i := little; i <= big; i++ {
+		slice = append(slice, i)
+	}
+    for index,item:=range(slice) {
+	   for _,items:=range(nums) {
+		   if item==items{
+			slice[index]=0
+		   }
+	    }
+    }  
+    for _,item:=range(slice) {
+       if item!=0{
+	      return item
+        }
+    }
+	return 0
+}
 //////////////////////////////////////////////////////////////////////////
 //136. Single Number
 func singleNumber(nums []int) {
