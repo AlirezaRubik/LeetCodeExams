@@ -555,3 +555,18 @@ func intersection(nums1 []int, nums2 []int) []int {
 
 	return result
 }
+// ////////////////////////////////////////////////////////////////
+//Submission Detail
+func sumOfTheDigitsOfHarshadNumber(x int) int {
+	sum := 0
+	input := x
+	for i := 1; x > 0; i++ {
+		digit := x % 10
+		sum += digit
+		x /= 10
+	}
+	if input%sum != 0 {
+		return -1
+	}
+	return sum
+}
