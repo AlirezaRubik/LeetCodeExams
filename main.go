@@ -616,4 +616,18 @@ func mySqrt(x int) int {
     return -1  
 }
 // ////////////////////////////////////////////////////////////////
+//Excel Sheet Column Title
+func convertToTitle(columnNumber int) string {
+	var result string
+
+	for columnNumber > 0 {
+		columnNumber-- // Adjust to 0-indexed
+		remainder := columnNumber % 26
+		result = string('A'+remainder) + result
+		columnNumber /= 26
+	}
+
+	return result
+}
+////////////////////////////////////////////////////////////////
 
