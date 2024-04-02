@@ -595,3 +595,25 @@ func encrypt(num int) int {
     return large
 }
 // ////////////////////////////////////////////////////////////////
+//69. Sqrt(x)
+func mySqrt(x int) int {
+    if x == 0 {
+        return 0
+    }
+
+    left, right := 1, x
+    for left <= right {
+        mid := left + (right - left) / 2
+        if mid <= x / mid && (mid + 1) > x / (mid + 1) {
+            return mid
+        } else if mid > x / mid {
+            right = mid - 1
+        } else {
+            left = mid + 1
+        }
+    }
+
+    return -1  
+}
+// ////////////////////////////////////////////////////////////////
+
