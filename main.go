@@ -635,4 +635,22 @@ func myPow(x float64, n int) float64 {
    return math.Pow(x,float64(n))
 }
 ////////////////////////////////////////////////////////////////
-
+//power-of-two
+func isPowerOfTwo(n int) bool {
+	res:=n
+	var count float64 =0
+	if n == 1 {
+		return true
+	}
+	for i := n; i >= 1; i/=2 {
+		if i%2 == 0 {
+             count++
+		}
+	}
+	Result:=math.Pow(2, count)
+	if Result==float64(res){
+		return true
+	}
+	return false
+}
+////////////////////////////////////////////////////////////////
