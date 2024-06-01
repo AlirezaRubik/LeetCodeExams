@@ -655,3 +655,72 @@ func isPowerOfTwo(n int) bool {
 	return false
 }
 ////////////////////////////////////////////////////////////////
+func Sum150(){
+	Str1:="123445678901234456789012344567890123445678901234456789012344567890123445678901234456789012344567890123445678901234456789012344567890123445678901234456789012344567890"
+	Str2:="123445678901234456789012344567890123445678901234456789012344567890123445678901234456789012344567890123445678901234456789012344567890123445678901234456789012344567890"
+	var Result[]int
+
+	for i:=0;i<len(Str1);i++{
+		carryFlag := 0
+		Num,err:=strconv.Atoi(string(Str1[i]))
+		if err!=nil{
+            fmt.Println(err)
+        }
+		Num2,err:=strconv.Atoi(string(Str2[i]))
+		if err!=nil{
+            fmt.Println(err)
+        }
+		Nums:=Num+Num2+carryFlag
+		if Nums>=10{
+			Result = append(Result,Nums%10)
+			carryFlag = Nums / 10
+		}else{
+           Result=append(Result,Nums)
+		}
+	}
+	fmt.Printf("%v \n",Result)
+}
+////////////////////////////////////////////////////////////////
+func Sum150v2(){
+		Str1 := "123445678901234456789012344567890123445678901234456789012344567890123445678901234456789012344567890123445678901234456789012344567890123445678901234456789012344567890"
+	Str2 := "123445678901234456789012344567890123445678901234456789012344567890123445678901234456789012344567890123445678901234456789012344567890123445678901234456789012344567890"
+	str3 := ""
+
+	if len(Str1) != len(Str2) {
+		fmt.Println("Lengths of the input strings do not match")
+		return
+	}
+
+	carryFlag := 0
+	length := len(Str1)
+
+	for i := length - 1; i >= 0; i-- {
+		Num, err := strconv.Atoi(string(Str1[i]))
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+		Num2, err := strconv.Atoi(string(Str2[i]))
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+		Nums := Num + Num2 + carryFlag
+		if Nums >= 10 {
+			str3 = strconv.Itoa(Nums%10) + str3
+			carryFlag = Nums / 10
+		} else {
+			str3 = strconv.Itoa(Nums) + str3
+			carryFlag = 0
+		}
+	}
+
+	// If there is any carry left, add it
+	if carryFlag > 0 {
+		str3 = strconv.Itoa(carryFlag) + str3
+	}
+
+	fmt.Println(str3)
+}
+////////////////////////////////////////////////////////////////
+
