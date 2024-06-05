@@ -723,4 +723,11 @@ func Sum150v2(){
 	fmt.Println(str3)
 }
 ////////////////////////////////////////////////////////////////
-
+//Divide Two Integers
+func divide(d int, di int) int {
+     if d/di == 2147483648{
+         return d/di-1
+     }
+     return d/di
+}
+////////////////////////////////////////////////////////////////
