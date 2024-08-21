@@ -731,3 +731,13 @@ func divide(d int, di int) int {
      return d/di
 }
 ////////////////////////////////////////////////////////////////
+func moveZeroes(nums []int)  {
+    count := 0
+    for index, _ := range nums {
+        if nums[index] != 0 {
+            nums[count], nums[index] = nums[index], nums[count]
+            count++
+        }
+    }
+}
+////////////////////////////////////////////////////////////////
