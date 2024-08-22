@@ -2,11 +2,13 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"sort"
+	"strconv"
 	"strings"
 	"sync"
-	"math"
 )
+
 //////////////////////////////////////////////////////////////////////////
 func missingNumber(nums []int) int {
 	little := nums[0]
