@@ -9,6 +9,22 @@ import (
 	"sync"
 )
 //////////////////////////////////////////////////////////////////////////
+func isPowerOfThree(n int) bool {
+	if n == 1 {
+		return true
+	}
+	if n < 1 {
+		return false
+	}
+
+	for i := 3; i <= n; i *= 3 {
+		if i == n {
+			return true
+		}
+	}
+	return false
+}
+//////////////////////////////////////////////////////////////////////////
 func isUgly(n int) bool {
         if n == 1 {
         return true
