@@ -9,6 +9,41 @@ import (
 	"sync"
 )
 //////////////////////////////////////////////////////////////////////////
+func isValid(s string) bool {
+	var res bool = false
+	slice := []byte{}
+	if len(s)<=1{
+		return false
+	}
+	for i := 0; i < len(s); i++ {
+		slice = append(slice, s[i])
+	}
+	for _, item := range slice {
+		if item == 40 {
+			for i := 0; i < len(slice); i++ {
+				if slice[i] == 41 {
+					res = true
+				}
+			}
+		}
+		if item == 123 {
+			for i :=0; i < len(slice); i++ {
+				if slice[i] == 125 {
+					res = true
+				}
+			}
+		}
+		if item == 91 {
+			for i :=0; i < len(slice); i++ {
+				if slice[i] == 93 {
+					res = true
+				}
+			}
+		}
+	}
+	return res
+}
+//////////////////////////////////////////////////////////////////////////
 func isPowerOfThree(n int) bool {
 	if n == 1 {
 		return true
