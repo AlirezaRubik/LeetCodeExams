@@ -9,6 +9,17 @@ import (
 	"sync"
 )
 //////////////////////////////////////////////////////////////////////////
+func hammingWeight(n int) int {
+	res:=fmt.Sprintf("%b",n)
+	count:=0
+    for i := 0; i < len(res); i++ {
+          if res[i]==49{
+			count++
+		  }
+	}
+	return count
+}
+//////////////////////////////////////////////////////////////////////////
 func isValid(s string) bool {
 	var res bool = false
 	slice := []byte{}
