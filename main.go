@@ -9,6 +9,15 @@ import (
 	"sync"
 )
 //////////////////////////////////////////////////////////////////////////
+func titleToNumber(columnTitle string) int {
+	columnNumber := 0
+	for _, char := range columnTitle {
+		value := int(char - 'A' + 1)
+		columnNumber = columnNumber*26 + value
+	}
+	return columnNumber
+}
+//////////////////////////////////////////////////////////////////////////
 func sortedSquares(nums []int) []int {
     Newnum:=[]int{}
     for _,item:=range nums{
