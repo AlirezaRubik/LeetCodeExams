@@ -9,6 +9,17 @@ import (
 	"sync"
 )
 //////////////////////////////////////////////////////////////////////////
+func sortedSquares(nums []int) []int {
+    Newnum:=[]int{}
+    for _,item:=range nums{
+        Newnum=append(Newnum,item*item)
+    }
+    sort.Slice(Newnum, func(i, j int) bool {
+        return Newnum[i]<Newnum[j]
+    })
+    return Newnum
+}
+//////////////////////////////////////////////////////////////////////////
 func hammingWeight(n int) int {
 	res:=fmt.Sprintf("%b",n)
 	count:=0
